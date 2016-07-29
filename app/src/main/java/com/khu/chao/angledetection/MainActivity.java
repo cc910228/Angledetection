@@ -75,6 +75,9 @@ public class MainActivity extends Activity {
         double ref_bc_5=height*376/3264;
         double ref_ab_6=width*324/1839;
         double ref_bc_6=height*312/3264;
+        double TV_x=7.5;
+        double TV_y=1.656;
+        double TV_z=-1.788;
 
 
         int []pixels = new int[width * height]; //通过位图的大小创建像素点数组
@@ -157,6 +160,7 @@ public class MainActivity extends Activity {
                                             int bcdistance= (int)Math.floor(Math.sqrt((i3-i2)*(i3-i2)+(j3-j2)*(j3-j2)));
                                             //Toast.makeText(getApplicationContext(), "bc="+bcdistance, Toast.LENGTH_SHORT).show();
 
+
                                             if(bcdistance<ref_bc_2 && bcdistance>ref_bc_3){
                                                 if(bcdistance<(ref_bc_2+ref_bc_3)/2){
                                                     distance=3;
@@ -212,6 +216,20 @@ public class MainActivity extends Activity {
                                                 Toast.makeText(getApplicationContext(), "distance is not in range", Toast.LENGTH_SHORT).show();
                                             }
 
+                                            double left_right=Math.acos(((i1-i2)*(i3-i2)+(j1-j2)*(j3-j2))/(Math.sqrt((i1-i2)*(i1-i2)+(j1-j2)*(j1-j2))+Math.sqrt((i3-i2)*(i3-i2)+(j3-j2)*(j3-j2))));
+                                            if(left_right>0){
+                                                boolean left_dir=false;
+                                                double vector_x=Math.cos(angle)*distance;
+                                                double vector_y=0;
+                                                double vector_z=-Math.sin(angle)*distance;
+                                                Toast.makeText(getApplicationContext(), "The vector is ("+vector_x+","+vector_y+","+vector_z+")", Toast.LENGTH_SHORT).show();
+                                            }else if(left_right<=0){
+                                                boolean left_dir=true;
+                                                double vector_x=Math.cos(angle)*distance;
+                                                double vector_y=0;
+                                                double vector_z=Math.sin(angle)*distance;
+                                                Toast.makeText(getApplicationContext(), "The vector is ("+vector_x+","+vector_y+","+vector_z+")", Toast.LENGTH_SHORT).show();
+                                            }
 
 
                                             flag=true;
